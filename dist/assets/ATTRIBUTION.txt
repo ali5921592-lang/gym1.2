@@ -1,0 +1,7 @@
+Anatomy mesh: https://github.com/JohanBellander/BodyExplorer
+BodyParts3D, Copyright The Database Center for Life Science.
+Creative Commons Attribution-ShareAlike 2.1 Japan: https://creativecommons.org/licenses/by-sa/2.1/jp/
+Z-Anatomy by Gauthier Kervyn. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+Mesh preparation: BodyExplorer (Johan Bellander).
+Mesh geometry is unchanged; Fitness Copilot assigns colors, scale and rotation at runtime.
+Distributed model remains under these original share-alike licenses.

@@ -1,0 +1,22 @@
+// BodyParts3D / Z-Anatomy mesh labels determine anatomical regions.
+export const detailMuscles={
+ upperchest:{name:'Üst göğüs',latin:'Pectoralis major · pars clavicularis',parent:'chest',description:'Göğüs kasının köprücük kemiğine yakın bölümüdür. Eğik sehpa itişlerinde ve kolu öne kaldırırken çalışır.'},
+ frontdelts:{name:'Ön omuz',latin:'Deltoideus · pars clavicularis',parent:'shoulders',description:'Kolunu öne kaldırmana ve itiş hareketlerine yardımcı olur.'},
+ reardelts:{name:'Arka omuz',latin:'Deltoideus · pars spinalis',parent:'shoulders',description:'Üst kolunu geriye ve yana taşır. Ters açış ve face pull ile çalışır.'},
+ traps:{name:'Trapez',latin:'Trapezius',parent:'back',description:'Kürek kemiklerini kaldırır, yaklaştırır ve döndürür. Üst, orta ve alt lifleri farklı görevler üstlenir.'},
+ lats:{name:'Kanat kası',latin:'Latissimus dorsi',parent:'back',description:'Üst kolu gövdene ve geriye çeker. Barfiks, pulldown ve row hareketlerinde çalışır.'},
+ rhomboids:{name:'Romboidler',latin:'Rhomboideus major ve minor',parent:'back',description:'Kürek kemiklerinin arasında yer alır. Kontrollü çekişlerde kürek kemiklerini birbirine yaklaştırır.'},
+ erectors:{name:'Bel ve omurga kasları',latin:'Erector spinae',parent:'back',description:'Omurganın duruşunu korumaya ve gövdeyi doğrultmaya yardımcı olur. Kontrol, ağırlıktan önce gelir.'},
+ obliques:{name:'Yan karın',latin:'Obliquus externus ve internus',parent:'abs',description:'Gövdeyi döndürür ve yana eğilmeye karşı dengeler. Yan plank sırasında sabitleyici olarak çalışır.'},
+ forearms:{name:'Ön kol',latin:'Brachioradialis ve ön kol kasları',description:'Kavrama, bilek hareketleri ve dirsek bükmeye katkı sağlar. Hammer curl ile çekişlerde görev alır.'},
+ serratus:{name:'Serratus · Kaburga yanı',latin:'Serratus anterior',description:'Kürek kemiğini göğüs kafesine yakın tutar, öne ve yukarı hareketine yardım eder.'},
+ gluteabductors:{name:'Yan kalça',latin:'Gluteus medius ve minimus',parent:'glutes',description:'Bacağını yana açar ve tek ayak üzerinde pelvisi dengeler. Abductor ve tek bacak hareketlerinde çalışır.'},
+ soleus:{name:'Derin baldır',latin:'Soleus',parent:'calves',description:'Topuğunu kaldırır. Diz bükülü baldır yükseltmelerinde belirgin rol alır; yürüyüşte de çalışır.'}
+};
+export const detailColors={upperchest:'#ffab72',frontdelts:'#3ddad8',reardelts:'#5096ff',traps:'#f5b84e',lats:'#8876ef',rhomboids:'#b799ef',erectors:'#cf7dcc',obliques:'#33bba0',forearms:'#efbd80',serratus:'#ef828e',gluteabductors:'#ca70cc',soleus:'#73a6ee'};
+export const detailTargets={upperchest:['inclinepress','benchpress','dbbench','chestpress','pushup'],frontdelts:['press','machinepress','inclinepress','chestpress','pushup'],reardelts:['reversefly','reversepec','facepull','barbellrow'],traps:['facepull','reversefly','reversepec','cablerow','barbellrow','press'],lats:['pulldown','assistedpull','row','cablerow','barbellrow','bandrow'],rhomboids:['row','cablerow','barbellrow','bandrow','reversefly','facepull'],erectors:['bird','rdl','barbellrow','backextension'],obliques:['sideplank','deadbug','bird','plank'],forearms:['hammer','curl','ezcurl','row','bandcurl','assistedpull'],serratus:['pushup','wallpush','press','plank'],gluteabductors:['abductor','sidelunge','lunge','split','stepup','sideplank'],soleus:['seatedcalf','calf','walk','treadmill','stairs']};
+export function classifyMuscle(name){
+ const n=name.toLowerCase().replaceAll('_',' ');if(/tendon|aponeurosis|retinaculum|fascia/.test(n))return null;
+ const groups={upperchest:/clavicular.*pectoralis/,frontdelts:/clavicular.*deltoid/,reardelts:/spinal part.*deltoid/,traps:/trapezius/,lats:/latissimus/,rhomboids:/rhomboid/,erectors:/erector|iliocostalis|longissimus|spinalis|multifidus/,obliques:/(external|internal) oblique/,serratus:/serratus anterior/,forearms:/brachioradialis|pronator|supinator|flexor carpi|extensor carpi|palmaris longus/,gluteabductors:/gluteus (medius|minimus)/,soleus:/soleus/,chest:/pectoralis/,shoulders:/deltoid/,biceps:/biceps brachii|brachialis/,triceps:/triceps brachii|anconeus/,abs:/rectus abdominis|transversus abdominis/,back:/teres|infraspinatus|supraspinatus/,glutes:/gluteus|piriformis/,quads:/rectus femoris|vastus/,hamstrings:/biceps femoris|semitendinosus|semimembranosus/,calves:/gastrocnemius/,adductors:/adductor.*(brevis|longus|magnus)|gracilis|pectineus/};
+ return Object.keys(groups).find(k=>groups[k].test(n))||null;
+}
