@@ -1,0 +1,24 @@
+{
+  "name": "fitness-copilot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-mobile.mjs",
+    "native:configure": "node scripts/configure-native.mjs",
+    "native:sync": "npm run native:configure && npm run build && cap sync",
+    "android": "npm run native:sync && cap open android",
+    "ios": "npm run native:sync && cap open ios"
+  },
+  "dependencies": {
+    "@capacitor-community/admob": "8.1.0",
+    "@capacitor/android": "8.5.2",
+    "@capacitor/core": "8.5.2",
+    "@capacitor/ios": "8.5.2",
+    "@revenuecat/purchases-capacitor": "13.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2",
+    "esbuild": "0.25.12"
+  }
+}
