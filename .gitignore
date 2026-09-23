@@ -1,0 +1,11 @@
+.openai/*.credential*
+.sites-runtime/
+node_modules/
+www/
+android/.gradle/
+android/**/build/
+android/keystore.properties
+android/*.jks
+ios/DerivedData/
+*.xcarchive
+*.ipa

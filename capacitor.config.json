@@ -1,0 +1,8 @@
+{
+  "appId": "com.fitnesscopilot.app",
+  "appName": "Fitness Copilot",
+  "webDir": "www",
+  "backgroundColor": "#081410",
+  "android": {"allowMixedContent": false,"backgroundColor": "#081410"},
+  "ios": {"backgroundColor": "#081410","contentInset": "automatic"}
+}
