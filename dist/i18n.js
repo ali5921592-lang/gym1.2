@@ -69,11 +69,13 @@ if(typeof document!=='undefined'){
 }
 export async function chooseInitialLanguage(){
  if(supported.has(legacy[storage?.getItem(STORAGE_KEY)]||storage?.getItem(STORAGE_KEY)))return;
- const dialog=document.querySelector('#commerce-modal'),body=document.querySelector('#commerce-body');
- const introductions={tr:'Dilini seç', 'en-US':'Choose your language',es:'Elige tu idioma','pt-BR':'Escolha seu idioma',fr:'Choisissez votre langue',de:'Wähle deine Sprache',ar:'اختر لغتك'};
- body.innerHTML=`<section class="commerce-sheet first-language" data-i18n-ignore><div class="commerce-hero"><img class="welcome-logo" src="assets/fitness-copilot-logo.jpeg" alt="Fitness Copilot"><span class="commerce-kicker">Fitness Copilot</span><h1>Choose your language</h1><p>Dilini seç · اختر لغتك</p></div><div class="language-grid">${Object.entries(FORMA_LANGUAGES).map(([code,item])=>`<button class="language-option" data-first-language="${code}" lang="${code}" dir="${item.dir}"><strong>${item.native}</strong><small>${introductions[code]}</small><span aria-hidden="true">↗</span></button>`).join('')}</div></section>`;
- dialog.setAttribute('aria-label','Choose your language');dialog.showModal();
- await new Promise(resolve=>{const prevent=event=>event.preventDefault();const choose=event=>{const button=event.target.closest('[data-first-language]');if(!button||!setLanguage(button.dataset.firstLanguage))return;dialog.removeEventListener('cancel',prevent);body.removeEventListener('click',choose);dialog.close();body.innerHTML='';dialog.removeAttribute('aria-label');resolve();};dialog.addEventListener('cancel',prevent);body.addEventListener('click',choose);});
+ const candidates=[...(navigator.languages||[]),navigator.language].filter(Boolean).map(value=>String(value).toLowerCase());
+ const detected=candidates.map(value=>{
+  if(value.startsWith('tr'))return'tr';if(value.startsWith('ar'))return'ar';if(value.startsWith('de'))return'de';
+  if(value.startsWith('es'))return'es';if(value.startsWith('pt'))return'pt-BR';if(value.startsWith('fr'))return'fr';
+  if(value.startsWith('en'))return'en-US';return null;
+ }).find(Boolean)||'en-US';
+ setLanguage(detected);
 }
 if(typeof window!=='undefined')window.FORMA_I18N={currentLanguage,currentLocale,setLanguage,t:translateText,languages:FORMA_LANGUAGES};
 export {FORMA_LANGUAGES,FORMA_LANGUAGE_CODES};
