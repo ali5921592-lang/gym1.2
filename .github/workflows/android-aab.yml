@@ -37,7 +37,10 @@ jobs:
       - run: npm run native:sync
       - name: Build signed AAB
         working-directory: android
-        run: chmod +x gradlew && ./gradlew bundleRelease
+        run: |
+          sed -i 's/\r$//' gradlew
+          chmod +x gradlew
+          ./gradlew bundleRelease
       - uses: actions/upload-artifact@v4
         with:
           name: Fitness-Copilot-AAB
