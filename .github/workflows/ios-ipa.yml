@@ -48,7 +48,7 @@ jobs:
       - name: Create export settings
         run: sed -e "s/__APPLE_TEAM_ID__/$APPLE_TEAM_ID/g" -e "s/__PROFILE_NAME__/$PROFILE_NAME/g" ios/ExportOptions.plist.template > ios/ExportOptions.plist
       - name: Archive application
-        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" CODE_SIGN_STYLE=Automatic CODE_SIGN_IDENTITY="Apple Distribution" DEVELOPMENT_TEAM="$APPLE_TEAM_ID" archive
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" archive
       - name: Export IPA
         run: xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" -exportPath "$RUNNER_TEMP/ipa" -exportOptionsPlist ios/ExportOptions.plist
       - uses: actions/upload-artifact@v4
