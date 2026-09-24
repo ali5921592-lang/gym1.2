@@ -9,7 +9,6 @@ jobs:
     env:
       ADMOB_TESTING: ${{ secrets.ADMOB_TESTING }}
       ADMOB_IOS_APP_ID: ${{ secrets.ADMOB_IOS_APP_ID }}
-      ADMOB_IOS_BANNER: ${{ secrets.ADMOB_IOS_BANNER }}
       ADMOB_IOS_INTERSTITIAL: ${{ secrets.ADMOB_IOS_INTERSTITIAL }}
       REVENUECAT_IOS_API_KEY: ${{ secrets.REVENUECAT_IOS_API_KEY }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
@@ -47,11 +46,9 @@ jobs:
           cp "$PROFILE_PATH" "$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_UUID.mobileprovision"
           echo "PROFILE_NAME=$PROFILE_NAME" >> "$GITHUB_ENV"
       - name: Create export settings
-        run: |
-          sed -e "s/__APPLE_TEAM_ID__/$APPLE_TEAM_ID/g" -e "s/__PROFILE_NAME__/$PROFILE_NAME/g" ios/ExportOptions.plist.template > ios/ExportOptions.plist
+        run: sed -e "s/__APPLE_TEAM_ID__/$APPLE_TEAM_ID/g" -e "s/__PROFILE_NAME__/$PROFILE_NAME/g" ios/ExportOptions.plist.template > ios/ExportOptions.plist
       - name: Archive application
-        run: |
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="$APPLE_TEAM_ID" PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" archive
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY="Apple Distribution" DEVELOPMENT_TEAM="$APPLE_TEAM_ID" PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" archive
       - name: Export IPA
         run: xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" -exportPath "$RUNNER_TEMP/ipa" -exportOptionsPlist ios/ExportOptions.plist
       - uses: actions/upload-artifact@v4
