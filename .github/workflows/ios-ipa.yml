@@ -5,7 +5,7 @@ on:
     tags: ['v*']
 jobs:
   build-ipa:
-    runs-on: macos-15
+    runs-on: macos-26
     env:
       ADMOB_TESTING: ${{ secrets.ADMOB_TESTING }}
       ADMOB_IOS_APP_ID: ${{ secrets.ADMOB_IOS_APP_ID }}
