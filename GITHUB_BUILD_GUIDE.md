@@ -16,7 +16,6 @@ Repository → Settings → Secrets and variables → Actions bölümüne şunla
 - `ANDROID_KEY_PASSWORD`
 - `ADMOB_TESTING`: mağaza sürümünde `false`
 - `ADMOB_ANDROID_APP_ID`
-- `ADMOB_ANDROID_BANNER`
 - `ADMOB_ANDROID_INTERSTITIAL`
 - `REVENUECAT_ANDROID_API_KEY`
 
@@ -31,7 +30,6 @@ Actions → Android AAB → Run workflow seçildiğinde imzalı `Fitness-Copilot
 - `KEYCHAIN_PASSWORD`: yalnızca GitHub geçici anahtar zinciri için güçlü bir değer
 - `ADMOB_TESTING`: mağaza sürümünde `false`
 - `ADMOB_IOS_APP_ID`
-- `ADMOB_IOS_BANNER`
 - `ADMOB_IOS_INTERSTITIAL`
 - `REVENUECAT_IOS_API_KEY`
 
@@ -43,7 +41,7 @@ App Store Connect ve Google Play Console'da aylık ve yıllık abonelik ürünle
 
 ## 5. AdMob
 
-Geliştirme yapılandırması Google'ın test reklam kimliklerini kullanır. Canlı mağaza derlemesinde kendi App ID, banner ve interstitial kimliklerinizi Secrets'a girip `ADMOB_TESTING=false` ayarlayın. Aktif antrenmanda reklam gösterilmez; tam ekran reklamlar en az 5 dakika ve 4 uygun eylem aralığıyla, günde en fazla 3 kez gösterilir.
+Geliştirme yapılandırması Google'ın test reklam kimliklerini kullanır. Canlı mağaza derlemesinde kendi App ID ve geçiş reklamı kimliklerinizi Secrets'a girip `ADMOB_TESTING=false` ayarlayın. Banner reklam kullanılmaz. Aktif antrenmanda reklam gösterilmez; tam ekran reklamlar en az 8 dakika ve 5 uygun eylem aralığıyla, günde en fazla 2 kez gösterilir. Başarısız reklam isteği gösterim sayılmaz.
 
 ## Yerel komutlar
 
