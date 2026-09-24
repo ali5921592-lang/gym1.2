@@ -52,7 +52,6 @@ jobs:
       - name: Export IPA
         run: xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/FitnessCopilot.xcarchive" -exportPath "$RUNNER_TEMP/ipa" -exportOptionsPlist ios/ExportOptions.plist
       - name: Upload to TestFlight
-        if: ${{ secrets.APPSTORE_CONNECT_API_KEY_BASE64 != '' }}
         env:
           APPSTORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
           APPSTORE_CONNECT_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_ISSUER_ID }}
