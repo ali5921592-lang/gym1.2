@@ -1,5 +1,6 @@
 import translations,{FORMA_LANGUAGES,FORMA_LANGUAGE_CODES,formaDir,formaLocale,formaT} from './forma-translations.js';
 import additions from './translation-additions.js';
+import atlasTranslations from './atlas-translations.js';
 
 const STORAGE_KEY='forma-lang';
 const extra={
@@ -30,7 +31,7 @@ const extra={
  'Açık havada koşan sporcu':{'en-US':'Athlete running outdoors',es:'Atleta corriendo al aire libre','pt-BR':'Atleta correndo ao ar livre',fr:'Athlète courant en plein air',de:'Athlet beim Laufen im Freien',ar:'رياضي يركض في الهواء الطلق'},
  'Ses başlatılamadı. Cihazın sesini ve seçili dilde konuşma desteğini kontrol et.':{'en-US':'Audio could not start. Check your device volume and voice support for the selected language.',es:'No se pudo iniciar el audio. Comprueba el volumen y la voz del idioma seleccionado.','pt-BR':'Não foi possível iniciar o áudio. Verifique o volume e a voz do idioma selecionado.',fr:'Le son n’a pas pu démarrer. Vérifiez le volume et la voix de la langue sélectionnée.',de:'Die Sprachausgabe konnte nicht gestartet werden. Prüfe Lautstärke und Sprachunterstützung.',ar:'تعذر تشغيل الصوت. تحقّق من مستوى الصوت ودعم اللغة المحددة.'}
 };
-Object.assign(extra,additions);
+Object.assign(extra,additions,atlasTranslations);
 const supported=new Set(FORMA_LANGUAGE_CODES);
 const storage=typeof localStorage==='undefined'?null:localStorage;
 const legacy={'en':'en-US','pt':'pt-BR'};

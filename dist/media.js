@@ -5,11 +5,18 @@ let cleanup=()=>{};
 export function stopMedia(){cleanup();cleanup=()=>{};}
 export function mediaMarkup(e){
  const m=mediaFor(e);if(!m)return '<div class="tip">Bu hareketin video kaynağı henüz eklenmedi.</div>';
- return `<div class="video-frame ${m.type==='video'?'native-video-frame':''}" id="video-frame"><button class="video-cover" data-action="video" data-id="${e.id}">${m.poster?`<img class="video-poster" src="${m.poster}" alt="${e.name} gösterimi">`:''}<span class="play-big">▶</span><span>${e.name}</span><small>${m.type==='video'?'Harekete özel kısa gösterim':'Eğitmen anlatımı'} · İzlemek için dokun</small></button></div><div class="media-credit">${m.provider}${m.license?' · '+m.license:''}${m.licenseUrl?` · <a href="${m.licenseUrl}" target="_blank" rel="noopener">Lisans</a>`:''}</div>${m.note?`<p class="video-variation">${m.note}</p>`:''}<div class="video-mode"><button class="secondary" data-action="video" data-id="${e.id}">▶ Videoyu aç</button>${m.type==='youtube'?`<button class="quiet" data-action="video" data-id="${e.id}" data-mode="standard">Diğer oynatıcıyı dene</button>`:''}</div><p class="media-status" id="media-status" role="status" aria-live="polite"></p>`;
+ return `<div class="video-frame ${m.type==='video'?'native-video-frame':''}" id="video-frame"><button class="video-cover" data-action="video" data-id="${e.id}">${m.poster?`<img class="video-poster" src="${m.poster}" alt="${e.name} gösterimi">`:''}<span class="play-big">▶</span><span>${e.name}</span><small>${m.type==='video'?'Harekete özel kısa gösterim':'Eğitmen anlatımı'} · İzlemek için dokun</small></button></div><div class="media-credit">${m.provider}${m.license?' · '+m.license:''}${m.licenseUrl?` · <a href="${m.licenseUrl}" target="_blank" rel="noopener">Lisans</a>`:''}</div>${m.note?`<p class="video-variation">${m.note}</p>`:''}<div class="video-mode"><button class="secondary" data-action="video" data-id="${e.id}">▶ Videoyu aç</button>${m.type==='youtube'?`<small class="video-variation">iPhone ve Android'de video, uygulama içindeki güvenli tarayıcıda açılır.</small>`:''}</div><p class="media-status" id="media-status" role="status" aria-live="polite"></p>`;
 }
 export function playMedia(e,mode='private'){
  stopMedia();const m=mediaFor(e),host=document.querySelector('#video-frame'),status=document.querySelector('#media-status');if(!m||!host)return;
  const message=t=>{if(status?.isConnected)status.textContent=t;};
+ if(m.type==='youtube'&&window.Capacitor?.isNativePlatform?.()){
+  const url='https://www.youtube.com/watch?v='+encodeURIComponent(m.url);
+  message('Video uygulama içindeki güvenli oynatıcıda açılıyor…');
+  window.dispatchEvent(new CustomEvent('fitness:open-video',{detail:{url,title:e.name}}));
+  host.innerHTML='<div class="video-error"><strong>Video açıldı</strong><p>Videoyu izledikten sonra Fitness Copilot’a dönerek tekniği ve setlerini takip etmeye devam edebilirsin.</p></div>';
+  return;
+ }
  let timeout;const fail=t=>{if(!host.isConnected)return;stopMedia();message(t);host.innerHTML='<div class="video-error"><strong>Video bağlantısı kurulamadı</strong><p>Sağlayıcının oynatıcısı bu tarayıcıda yüklenemedi. Hareketin adım adım rehberi aşağıda kullanılabilir.</p><button class="secondary" data-action="video" data-id="'+e.id+'" data-mode="standard">Videoyu yeniden dene</button></div>';};message('Video bağlanıyor…');
  if(m.type==='video'){
   const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='auto';v.src=m.url;v.setAttribute('aria-label',e.name+' hareket gösterimi');if(m.poster)v.poster=m.poster;host.replaceChildren(v);
