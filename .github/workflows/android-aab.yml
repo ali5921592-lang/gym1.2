@@ -27,7 +27,9 @@ jobs:
       - run: npm ci
       - name: Set store build number
         run: |
-          BUILD_NUMBER=$(date -u +%s)
+          # Continue after the highest bundle already registered in Play; leave 100 IDs per workflow run for retries.
+          VERSION_CODE_FLOOR=1790445193
+          BUILD_NUMBER=$((VERSION_CODE_FLOOR + GITHUB_RUN_NUMBER * 100 + GITHUB_RUN_ATTEMPT))
           test "$BUILD_NUMBER" -le 2100000000 || { echo "Android build number exceeds Play's limit"; exit 1; }
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
       - name: Configure release signing
