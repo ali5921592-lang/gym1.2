@@ -11,10 +11,10 @@ export function playMedia(e,mode='private'){
  stopMedia();const m=mediaFor(e),host=document.querySelector('#video-frame'),status=document.querySelector('#media-status');if(!m||!host)return;
  const message=t=>{if(status?.isConnected)status.textContent=t;};
  if(m.type==='youtube'&&window.Capacitor?.isNativePlatform?.()){
-  const url='https://www.youtube.com/watch?v='+encodeURIComponent(m.url);
+  const url='https://ali5921592-lang.github.io/gym1.2/video-player.html?id='+encodeURIComponent(m.url)+'&title='+encodeURIComponent(e.name);
   message('Video uygulama içindeki güvenli oynatıcıda açılıyor…');
   window.dispatchEvent(new CustomEvent('fitness:open-video',{detail:{url,title:e.name}}));
-  host.innerHTML='<div class="video-error"><strong>Video açıldı</strong><p>Videoyu izledikten sonra Fitness Copilot’a dönerek tekniği ve setlerini takip etmeye devam edebilirsin.</p></div>';
+  host.innerHTML='<div class="video-error"><strong>Oynatıcı açıldı</strong><p>Videodan sonra pencereyi kapatıp Fitness Copilot’taki teknik adımlara dönebilirsin.</p></div>';
   return;
  }
  let timeout;const fail=t=>{if(!host.isConnected)return;stopMedia();message(t);host.innerHTML='<div class="video-error"><strong>Video bağlantısı kurulamadı</strong><p>Sağlayıcının oynatıcısı bu tarayıcıda yüklenemedi. Hareketin adım adım rehberi aşağıda kullanılabilir.</p><button class="secondary" data-action="video" data-id="'+e.id+'" data-mode="standard">Videoyu yeniden dene</button></div>';};message('Video bağlanıyor…');
