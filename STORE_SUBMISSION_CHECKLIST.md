@@ -1,18 +1,35 @@
-# Store submission checklist
+# Store release checklist — Fitness Copilot
 
-Complete these items before submitting Fitness Copilot for App Review.
+Status checked 27 September 2026. The local working copy is a source archive, not a Git checkout; its edits have not yet been pushed to GitHub.
 
-- [ ] Add a real, monitored private support contact to `privacy.html` and `terms.html`; the current public GitHub issue link is for general support and must not receive personal information. Use the same contact in both store listings.
-- [ ] Enable GitHub Pages from `main` / root, then verify `https://ali5921592-lang.github.io/gym1.2/privacy.html` and `/terms.html` both return rendered HTML (HTTP 200, `text/html`). Enter those URLs in both stores. The previous `raw.githubusercontent.com` URL returned source text.
-- [ ] Create the monthly and annual auto-renewable subscriptions in App Store Connect, including their 7-day introductory offers, review screenshots, localized display names, and review notes.
-- [ ] In RevenueCat, connect the App Store products to the `pro` entitlement and configure a current offering containing the monthly and annual packages.
-- [ ] Add `REVENUECAT_IOS_API_KEY` to GitHub Actions Secrets before producing the release build.
-- [ ] Add production AdMob identifiers only when the AdMob account and consent messages are ready. Keep `ADMOB_TESTING=true` for TestFlight testing.
-- [ ] Complete App Privacy answers to match the final AdMob and RevenueCat configuration.
-- [ ] Complete Google Play Data safety and Health apps declarations for this workout planner; include the final AdMob and RevenueCat SDK data practices. Check iOS App Privacy answers against the same release binary.
-- [ ] Publish an AdMob European regulations consent message for the selected territories and languages. Verify the in-app Privacy and ad choices button reopens privacy options where required.
-- [ ] Confirm screenshots and descriptions show actual in-app screens, and label every Pro-only feature clearly.
-- [ ] Keep third-party video and anatomy license/permission evidence available for App Review; remove any source whose playback or permitted use cannot be confirmed.
-- [ ] Test every exercise video, the Restore Purchases flow, the subscription trial flow, Pro atlas access, and all external links on a physical iPhone.
-- [ ] Test Android purchase/restore, consent choices, interstitial timing, and video playback on a physical Android device.
-- [ ] Paste the contents of `APP_REVIEW_NOTES.md` into App Store Connect Review Notes.
+## Verified locally
+
+- [x] Device preferred language is selected on first launch when no saved language exists. Supported locales are Turkish, US English, Spanish, Brazilian Portuguese, French, German, and Arabic; unsupported device languages fall back to US English. A user’s saved language choice takes precedence.
+- [x] The app itself has no sign-in requirement. Workout history and onboarding settings are stored on-device.
+- [x] Free users can see and rotate the 3D anatomy preview; muscle selection, exercise matching, and training heatmap remain Pro-gated. The in-app atlas preview should let App Review understand the gated feature without reviewer credentials.
+- [x] App Review notes have been updated to describe the preview, sandbox purchase path, and no-login behavior.
+- [x] `npm run build` succeeds. Language fallback tests passed for TR, DE, AR, PT, FR, ES, EN and unsupported Japanese (US English fallback).
+- [x] There are 7 app UI locales. Store screenshots are static localized assets in App Store Connect; customers see the best matching App Store localization, not screenshots generated at runtime based on storefront country.
+
+## App Store Connect — live page findings
+
+- [x] App version 1.0 is in **Prepare for Submission**.
+- [x] Three Turkish iPhone screenshots are listed, but their previews show red error markers. Replace them with validated screenshots.
+- [x] Prepared 21 iPhone screenshots (Home, Exercises, and the interactive Muscle Atlas preview) for `tr-TR`, `en-US`, `es-ES`, `pt-BR`, `fr-FR`, `de-DE`, and `ar`. Each image is 1290 × 2796 JPEG; see `Fitness-Copilot-App-Store-Screenshots.zip`.
+- [ ] Upload those screenshots in App Store Connect and add matching localized listing metadata. The ASC language menu and file picker did not respond in this browser session; no upload is claimed.
+- [ ] Verify the selected build in the App Store version record, then ensure the final reviewed build includes the atlas-preview change.
+- [ ] Confirm both auto-renewable products and their 7-day introductory offers in App Store Connect. The user’s requested standard prices are USD 7.90/month and USD 49/year in higher-price markets, USD 2.90/month and USD 19/year in lower-price markets; configure storefront prices through Apple’s price points and validate exact displayed regional amounts. Do not assume Android or RevenueCat setup proves Apple products are ready.
+- [ ] Confirm both products are linked to the `pro` entitlement and the current RevenueCat offering, including sandbox purchase and restore tests.
+- [ ] Add an App Review contact name and phone number. The fields are currently blank; the app does not need demo login credentials. The owner previously said they would enter contact details themselves.
+- [ ] Set/verify App Review notes from `APP_REVIEW_NOTES.md`, subscription review screenshots, Privacy Policy URL, age rating, privacy answers, content rights, availability, and release mode.
+- [ ] Submit the version and first subscription products together for App Review after required metadata and assets are complete.
+
+## Release engineering / external checks
+
+- [ ] Publish the latest local source edits to `ali5921592-lang/gym1.2`, then run the signed iOS workflow and verify the resulting build in App Store Connect.
+- [ ] Build a new signed iOS release with production RevenueCat and AdMob identifiers, then upload that exact build to App Store Connect and wait for processing.
+- [ ] Test on a physical iPhone: free atlas preview, sandbox full-atlas purchase, restore, eligible/ineligible trial copy, each exercise video fallback, and ad suppression during training.
+- [ ] Verify model/video license permissions and retained attribution for all shipped assets.
+- [ ] Confirm GitHub Pages Privacy Policy and Terms URLs return public HTML and match the final app metadata.
+
+A successful local bundle build is not proof of a successful signed IPA, App Store processing, subscription availability, or review approval.
