@@ -1,6 +1,6 @@
 # Store release checklist — Fitness Copilot
 
-Status checked 27 September 2026. Latest source changes and the screenshot package are committed to `main` (`2c5cef3` and `490e7f6`). iOS IPA workflow run `36316398654` is in progress.
+Status checked 27 September 2026. Latest app source and screenshot package are committed to `main` (`2c5cef3` and `490e7f6`); status corrections are in `63b997e`. iOS IPA workflow run `36316398654` completed successfully and the TestFlight upload command returned success. Build processing is not yet independently visible in App Store Connect.
 
 ## Verified locally
 
@@ -26,7 +26,7 @@ Status checked 27 September 2026. Latest source changes and the screenshot packa
 
 ## Release engineering / external checks
 
-- [ ] Verify the signed iOS workflow `36316398654` completes and the build appears in App Store Connect.
+- [x] Signed iOS workflow `36316398654` completed successfully; wait for App Store Connect processing and select the new build in the version record.
 - [ ] Build a new signed iOS release with production RevenueCat and AdMob identifiers, then upload that exact build to App Store Connect and wait for processing.
 - [ ] Test on a physical iPhone: free atlas preview, sandbox full-atlas purchase, restore, eligible/ineligible trial copy, each exercise video fallback, and ad suppression during training.
 - [ ] Verify model/video license permissions and retained attribution for all shipped assets.
