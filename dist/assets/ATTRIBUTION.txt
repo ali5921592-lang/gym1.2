@@ -1,7 +1,25 @@
-Anatomy mesh: https://github.com/JohanBellander/BodyExplorer
-BodyParts3D, Copyright The Database Center for Life Science.
-Creative Commons Attribution-ShareAlike 2.1 Japan: https://creativecommons.org/licenses/by-sa/2.1/jp/
-Z-Anatomy by Gauthier Kervyn. CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
-Mesh preparation: BodyExplorer (Johan Bellander).
-Mesh geometry is unchanged; Fitness Copilot assigns colors, scale and rotation at runtime.
-Distributed model remains under these original share-alike licenses.
+Fitness Copilot anatomical model credits and reuse terms
+
+BodyParts3D, © The Database Center for Life Science.
+Original dataset: https://lifesciencedb.jp/bp3d/
+License: Creative Commons Attribution-ShareAlike 2.1 Japan
+https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en
+
+Z-Anatomy, by Gauthier Kervyn and the Z-Anatomy contributors.
+Original project: https://github.com/Z-Anatomy/Models-of-human-anatomy
+License for the anatomical meshes: Creative Commons Attribution-ShareAlike 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The model used by Fitness Copilot was obtained from Johan Bellander’s BodyExplorer:
+https://github.com/JohanBellander/BodyExplorer
+BodyExplorer decimated, aligned and combined the source meshes in anatomy.glb.
+Its source code is MIT licensed; the included anatomical geometry retains the
+applicable licenses of the original data sources listed above.
+
+Fitness Copilot did not modify the distributed mesh geometry. The app assigns
+colors, scale and rotation at runtime and provides muscle-to-exercise links.
+The model file itself is available in the public repository at
+https://github.com/ali5921592-lang/gym1.2/tree/main/dist/assets
+
+Reuse of the geometry must follow the attribution and share-alike terms of its
+underlying sources. These credits do not imply endorsement by the creators.
